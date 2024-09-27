@@ -131,6 +131,25 @@ class LinkedList {
     current.next = node;
   }
 
+  removeAt(index) {
+    if (index < 0) throw new Error(`Index cannot be negative: ${index}`);
+    if (index >= this.#size) throw new Error(`Index out of bounds: ${index}`);
+
+    let current = this.#head;
+
+    if (index === 0) {
+      this.#head = current.next;
+      if (!this.#head) this.#tail = null;
+    } else {
+      for (let i = 0; i < index - 1; i++) current = current.next;
+      current.next = current.next.next;
+
+      if (!current.next) this.#tail = current;
+    }
+
+    this.#size -= 1;
+  }
+
   toString() {
     if (!this.#head) return "null";
 
