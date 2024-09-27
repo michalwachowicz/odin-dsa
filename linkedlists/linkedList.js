@@ -79,6 +79,18 @@ class LinkedList {
     return value;
   }
 
+  contains(value) {
+    if (!this.#head) return false;
+    let current = this.#head;
+
+    while (current) {
+      if (current.value === value) return true;
+      current = current.next;
+    }
+
+    return false;
+  }
+
   size() {
     return this.#size;
   }
