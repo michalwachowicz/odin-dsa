@@ -53,6 +53,32 @@ class LinkedList {
     return node;
   }
 
+  pop() {
+    if (!this.#head) return undefined;
+    if (this.#head === this.#tail) {
+      const value = this.#head.value;
+
+      this.#head = null;
+      this.#tail = null;
+      this.#size = 0;
+
+      return value;
+    }
+
+    let current = this.#head;
+    while (current.next !== this.#tail) {
+      current = current.next;
+    }
+
+    const value = this.#tail.value;
+
+    current.next = null;
+    this.#tail = current;
+    this.#size -= 1;
+
+    return value;
+  }
+
   size() {
     return this.#size;
   }
