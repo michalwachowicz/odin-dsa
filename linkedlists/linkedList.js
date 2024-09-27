@@ -129,6 +129,8 @@ class LinkedList {
 
     node.next = current.next;
     current.next = node;
+
+    this.#size += 1;
   }
 
   removeAt(index) {
