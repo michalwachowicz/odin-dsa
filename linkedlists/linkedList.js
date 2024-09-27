@@ -107,6 +107,30 @@ class LinkedList {
     return null;
   }
 
+  insertAt(index, value) {
+    if (index < 0) throw new Error("Index cannot be negative");
+
+    if (index >= this.#size) {
+      this.append(value);
+      return;
+    }
+
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    let current = this.#head;
+    for (let i = 0; i < index - 1; i++) {
+      current = current.next;
+    }
+
+    const node = new Node(value);
+
+    node.next = current.next;
+    current.next = node;
+  }
+
   toString() {
     if (!this.#head) return "null";
 
