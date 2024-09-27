@@ -178,4 +178,13 @@ class LinkedList {
   tail() {
     return this.#tail;
   }
+
+  static from(arr) {
+    if (!Array.isArray(arr)) throw new Error("Input must be an array");
+
+    const list = new LinkedList();
+    for (const item of arr) list.append(item);
+
+    return list;
+  }
 }
