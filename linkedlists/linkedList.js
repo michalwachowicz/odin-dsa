@@ -44,6 +44,15 @@ class LinkedList {
     this.#size += 1;
   }
 
+  at(index) {
+    if (index < 0 || index >= this.#size) return null;
+
+    let node = this.#head;
+    for (let i = 0; i < index; i++) node = node.next;
+
+    return node;
+  }
+
   size() {
     return this.#size;
   }
