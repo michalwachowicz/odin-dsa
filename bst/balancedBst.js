@@ -1,4 +1,5 @@
 const TreeNode = require("./treeNode");
+const Queue = require("../queue/queue");
 const { buildTree, cleanArray, prettyPrint } = require("./treeUtils");
 
 class Tree {
@@ -46,6 +47,21 @@ class Tree {
     return value < node.data
       ? this.find(value, node.left)
       : this.find(value, node.right);
+  }
+
+  levelOrder(cb) {
+    if (!this.root) return;
+
+    const queue = new Queue();
+    queue.enqueue(this.root);
+
+    while (!queue.isEmpty()) {
+      const current = queue.dequeue();
+      cb(current.data);
+
+      if (current.left) queue.enqueue(current.left);
+      if (current.right) queue.enqueue(current.right);
+    }
   }
 
   #getSuccessor(node) {
