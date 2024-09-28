@@ -16,17 +16,4 @@ const buildTree = (arr) => {
 const cleanArray = (arr) =>
   [...HashSet.from(arr)].sort((a, b) => (a < b ? -1 : 1));
 
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node === null) {
-    return;
-  }
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  }
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-  }
-};
-
-module.exports = { buildTree, cleanArray, prettyPrint };
+module.exports = { buildTree, cleanArray };
