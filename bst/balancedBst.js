@@ -5,3 +5,9 @@ class Node {
     this.right = null;
   }
 }
+
+class Tree {
+  constructor(data) {
+    this.root = new Node(data);
+  }
+}
