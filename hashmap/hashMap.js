@@ -91,4 +91,12 @@ class HashMap {
     this.#buckets[index].append(entry);
     this.#size += 1;
   }
+
+  remove(key) {
+    const index = this.indexOf(key);
+    const bucket = this.#buckets[index];
+
+    if (!bucket || bucket.isEmpty()) return;
+    this.#buckets[index].remove((entry) => entry.key === key);
+  }
 }
