@@ -92,6 +92,15 @@ class Tree {
     cb(node.data);
   }
 
+  height(node = this.root) {
+    if (node === null) return 0;
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    return 1 + Math.max(leftHeight, rightHeight);
+  }
+
   #getSuccessor(node) {
     node = node.right;
     while (node !== null && node.left !== null) node = node.left;
