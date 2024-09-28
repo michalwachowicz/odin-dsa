@@ -162,6 +162,10 @@ module.exports = class LinkedList {
     this.#size -= 1;
   }
 
+  isEmpty() {
+    return this.#head === null;
+  }
+
   toString() {
     if (!this.#head) return "null";
 
