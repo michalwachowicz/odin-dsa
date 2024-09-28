@@ -18,4 +18,31 @@ class Tree {
 
     return node;
   }
+
+  delete(value, node = this.root) {
+    if (node === null) return null;
+
+    if (value < node.data) {
+      node.left = this.delete(value, node.left);
+    } else if (value > node.data) {
+      node.right = this.delete(value, node.right);
+    } else {
+      if (node.left === null) return node.right;
+      if (node.right === null) return node.left;
+
+      let successor = this.#getSuccessor(node);
+
+      node.data = successor.data;
+      node.right = this.delete(successor.data, node.right);
+    }
+
+    return node;
+  }
+
+  #getSuccessor(node) {
+    node = node.right;
+    while (node !== null && node.left !== null) node = node.left;
+
+    return node;
+  }
 }
