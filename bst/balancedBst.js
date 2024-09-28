@@ -1,10 +1,11 @@
 const TreeNode = require("./treeNode");
+const HashSet = require("../hash/hashSet");
 const Queue = require("../queue/queue");
-const { buildTree, cleanArray, prettyPrint } = require("./treeUtils");
 
 class Tree {
   constructor(arr) {
-    this.root = buildTree(cleanArray(arr));
+    const cleanArr = [...HashSet.from(arr)].sort((a, b) => (a < b ? -1 : 1));
+    this.root = this.#buildTree(cleanArr);
   }
 
   insert(value, node = this.root) {
@@ -122,7 +123,7 @@ class Tree {
 
   rebalance() {
     const arr = this.toArray();
-    this.root = buildTree(arr);
+    this.root = this.#buildTree(arr);
   }
 
   toArray(node = this.root, result = []) {
@@ -140,12 +141,28 @@ class Tree {
       return;
     }
     if (node.right !== null) {
-      prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     if (node.left !== null) {
-      prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
+  }
+
+  #buildTree(arr) {
+    if (arr.length === 0) return null;
+
+    const mid = parseInt((arr.length - 1) / 2);
+    const root = new TreeNode(arr[mid]);
+
+    root.left = this.#buildTree(arr.slice(0, mid));
+    root.right = this.#buildTree(arr.slice(mid + 1));
+
+    return root;
   }
 
   #getSuccessor(node) {
