@@ -54,8 +54,12 @@ class HashMap {
     }
   }
 
+  indexOf(key) {
+    return this.#hash(key) % this.#buckets.length;
+  }
+
   getEntry(key) {
-    const index = this.#hash(key) % this.#buckets.length;
+    const index = this.indexOf(key);
     const list = this.#buckets[index];
 
     if (!list || list.isEmpty()) return undefined;
@@ -77,10 +81,9 @@ class HashMap {
 
     this.#grow(this.#size + 1);
 
-    const hash = this.#hash(key);
-    const index = hash % this.#buckets.length;
-
+    const index = this.indexOf(key);
     entry = new Entry(key, value);
+
     this.#buckets[index].append(entry);
     this.#size += 1;
   }
