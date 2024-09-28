@@ -120,6 +120,11 @@ class Tree {
     return Math.max(left, right) - Math.min(left, right) <= 1;
   }
 
+  rebalance() {
+    const arr = this.toArray();
+    this.root = buildTree(arr);
+  }
+
   toArray(node = this.root, result = []) {
     if (node === null) return result;
 
