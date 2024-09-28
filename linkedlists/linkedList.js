@@ -219,6 +219,15 @@ module.exports = class LinkedList {
     return this.#tail;
   }
 
+  *[Symbol.iterator]() {
+    let current = this.#head;
+
+    while (current) {
+      yield current.value;
+      current = current.next;
+    }
+  }
+
   static from(arr) {
     if (!Array.isArray(arr)) throw new Error("Input must be an array");
 
