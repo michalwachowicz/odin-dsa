@@ -105,4 +105,13 @@ class HashMap {
   length() {
     return this.#size;
   }
+
+  clear() {
+    this.#buckets.forEach((bucket) => {
+      while (!bucket.isEmpty()) bucket.pop();
+    });
+
+    this.#buckets = this.#generateBucketList(this.#buckets.length);
+    this.#size = 0;
+  }
 }
