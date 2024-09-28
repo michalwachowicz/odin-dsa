@@ -50,6 +50,7 @@ class Tree {
   }
 
   levelOrder(cb) {
+    if (!cb) throw new Error("Callback function must be present.");
     if (!this.root) return;
 
     const queue = new Queue();
@@ -65,6 +66,7 @@ class Tree {
   }
 
   inOrder(cb, node = this.root) {
+    if (!cb) throw new Error("Callback function must be present.");
     if (node === null) return;
 
     this.inOrder(cb, node.left);
@@ -73,6 +75,7 @@ class Tree {
   }
 
   preOrder(cb, node = this.root) {
+    if (!cb) throw new Error("Callback function must be present.");
     if (node === null) return;
 
     cb(node.data);
@@ -81,6 +84,7 @@ class Tree {
   }
 
   postOrder(cb, node = this.root) {
+    if (!cb) throw new Error("Callback function must be present.");
     if (node === null) return;
 
     this.inOrder(cb, node.left);
