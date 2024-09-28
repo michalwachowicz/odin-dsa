@@ -97,6 +97,8 @@ class HashMap {
     const bucket = this.#buckets[index];
 
     if (!bucket || bucket.isEmpty()) return;
+
     this.#buckets[index].remove((entry) => entry.key === key);
+    this.#size -= 1;
   }
 }
