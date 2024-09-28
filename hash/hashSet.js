@@ -1,6 +1,6 @@
 const { hash, generateBucketList } = require("./hashFunctions");
 
-class HashSet {
+module.exports = class HashSet {
   #buckets;
   #loadFactor;
   #size;
@@ -86,4 +86,4 @@ class HashSet {
 
     return keys;
   }
-}
+};
