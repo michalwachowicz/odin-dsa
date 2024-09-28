@@ -143,6 +143,32 @@ module.exports = class LinkedList {
     this.#size += 1;
   }
 
+  remove(cb) {
+    if (!this.#head) return;
+
+    if (cb(this.#head.value)) {
+      this.#head = this.#head.next;
+      this.#size -= 1;
+
+      if (!this.#head) this.#tail = null;
+      return;
+    }
+
+    let current = this.#head;
+
+    while (current.next) {
+      if (cb(current.next.value)) {
+        current.next = current.next.next;
+        this.#size -= 1;
+
+        if (!current.next) this.#tail = current;
+        return;
+      }
+
+      current = current.next;
+    }
+  }
+
   removeAt(index) {
     if (index < 0) throw new Error(`Index cannot be negative: ${index}`);
     if (index >= this.#size) throw new Error(`Index out of bounds: ${index}`);
