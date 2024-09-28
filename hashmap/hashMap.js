@@ -114,4 +114,14 @@ class HashMap {
     this.#buckets = this.#generateBucketList(this.#buckets.length);
     this.#size = 0;
   }
+
+  entries() {
+    const entries = [];
+
+    this.#buckets.forEach((list) => {
+      for (let entry of list) entries.push(entry);
+    });
+
+    return entries;
+  }
 }
