@@ -47,4 +47,20 @@ class HashMap {
     const entry = this.getEntry(key);
     return entry ? entry.value : undefined;
   }
+
+  put(key, value) {
+    let entry = this.getEntry(key);
+
+    if (entry) {
+      entry.value = value;
+      return;
+    }
+
+    const hash = this.#hash(key);
+    const index = hash % this.#buckets.length;
+
+    entry = new Entry(key, value);
+    this.#buckets[index].append(entry);
+    this.#size += 1;
+  }
 }
