@@ -30,7 +30,7 @@ class HashMap {
     for (let list of copy) {
       while (list && list.size()) {
         const entry = list.pop();
-        const index = hash(entry.key) % this.#buckets.length;
+        const index = this.indexOf(entry.key);
 
         this.#buckets[index].append(entry);
       }

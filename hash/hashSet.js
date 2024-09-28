@@ -23,7 +23,7 @@ module.exports = class HashSet {
     for (let list of copy) {
       while (list && list.size()) {
         const key = list.pop();
-        const index = hash(entry.key) % this.#buckets.length;
+        const index = this.indexOf(key);
 
         this.#buckets[index].append(key);
       }
