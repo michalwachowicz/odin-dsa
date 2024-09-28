@@ -64,6 +64,30 @@ class Tree {
     }
   }
 
+  inOrder(cb, node = this.root) {
+    if (node === null) return;
+
+    this.inOrder(cb, node.left);
+    cb(node.data);
+    this.inOrder(cb, node.right);
+  }
+
+  preOrder(cb, node = this.root) {
+    if (node === null) return;
+
+    cb(node.data);
+    this.inOrder(cb, node.left);
+    this.inOrder(cb, node.right);
+  }
+
+  postOrder(cb, node = this.root) {
+    if (node === null) return;
+
+    this.inOrder(cb, node.left);
+    this.inOrder(cb, node.right);
+    cb(node.data);
+  }
+
   #getSuccessor(node) {
     node = node.right;
     while (node !== null && node.left !== null) node = node.left;
