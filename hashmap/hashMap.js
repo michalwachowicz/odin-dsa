@@ -35,6 +35,25 @@ class HashMap {
     return hashCode;
   }
 
+  #grow(size = this.#size) {
+    if (size / this.#buckets.length <= this.#loadFactor) return;
+    const copy = this.#buckets;
+
+    this.#buckets = Array.from(
+      { length: copy.length * 2 },
+      () => new LinkedList()
+    );
+
+    for (let list of copy) {
+      while (list && list.size()) {
+        const entry = list.pop();
+        const index = this.#hash(entry.key) % this.#buckets.length;
+
+        this.#buckets[index].append(entry);
+      }
+    }
+  }
+
   getEntry(key) {
     const index = this.#hash(key) % this.#buckets.length;
     const list = this.#buckets[index];
