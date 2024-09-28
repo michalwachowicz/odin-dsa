@@ -124,4 +124,12 @@ class HashMap {
 
     return entries;
   }
+
+  keys() {
+    return this.entries().map((entry) => entry.key);
+  }
+
+  values() {
+    return this.entries().map((entry) => entry.value);
+  }
 }
