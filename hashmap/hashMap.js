@@ -35,13 +35,16 @@ class HashMap {
     return hashCode;
   }
 
-  get(key) {
+  getEntry(key) {
     const index = this.#hash(key) % this.#buckets.length;
     const list = this.#buckets[index];
 
     if (!list || list.isEmpty()) return undefined;
+    return list.find((entry) => entry.key === key);
+  }
 
-    const entry = list.find((entry) => entry.key === key);
+  get(key) {
+    const entry = this.getEntry(key);
     return entry ? entry.value : undefined;
   }
 }
