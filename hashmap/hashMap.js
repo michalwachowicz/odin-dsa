@@ -101,4 +101,8 @@ class HashMap {
     this.#buckets[index].remove((entry) => entry.key === key);
     this.#size -= 1;
   }
+
+  length() {
+    return this.#size;
+  }
 }
