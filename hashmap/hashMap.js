@@ -17,9 +17,13 @@ class HashMap {
     if (loadFactor > 1 || loadFactor < 0.1)
       throw new Error("Load factor must be between 0.1 and 1");
 
-    this.#buckets = Array.from({ length: capacity }, () => new LinkedList());
+    this.#buckets = this.#generateBucketList(capacity);
     this.#loadFactor = loadFactor;
     this.#size = 0;
+  }
+
+  #generateBucketList(length) {
+    return Array.from({ length }, () => new LinkedList());
   }
 
   #hash(key) {
@@ -39,11 +43,7 @@ class HashMap {
     if (size / this.#buckets.length <= this.#loadFactor) return;
     const copy = this.#buckets;
 
-    this.#buckets = Array.from(
-      { length: copy.length * 2 },
-      () => new LinkedList()
-    );
-
+    this.#buckets = this.#generateBucketList(copy.length * 2);
     for (let list of copy) {
       while (list && list.size()) {
         const entry = list.pop();
