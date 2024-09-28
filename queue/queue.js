@@ -1,11 +1,6 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
+const Node = require("../linkedlists/node");
 
-class Queue {
+module.exports = class Queue {
   #head;
   #tail;
 
@@ -35,4 +30,4 @@ class Queue {
     if (!this.#head) this.#tail = null;
     return dequeuedValue;
   }
-}
+};
