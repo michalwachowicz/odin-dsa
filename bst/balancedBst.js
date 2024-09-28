@@ -120,6 +120,16 @@ class Tree {
     return Math.max(left, right) - Math.min(left, right) <= 1;
   }
 
+  toArray(node = this.root, result = []) {
+    if (node === null) return result;
+
+    this.toArray(node.left, result);
+    result.push(node.data);
+    this.toArray(node.right, result);
+
+    return result;
+  }
+
   #getSuccessor(node) {
     node = node.right;
     while (node !== null && node.left !== null) node = node.left;
