@@ -39,6 +39,15 @@ class Tree {
     return node;
   }
 
+  find(value, node = this.root) {
+    if (node === null) return null;
+    if (node.data === value) return node;
+
+    return value < node.data
+      ? this.find(value, node.left)
+      : this.find(value, node.right);
+  }
+
   #getSuccessor(node) {
     node = node.right;
     while (node !== null && node.left !== null) node = node.left;
