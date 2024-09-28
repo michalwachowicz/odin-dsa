@@ -34,4 +34,14 @@ class HashMap {
 
     return hashCode;
   }
+
+  get(key) {
+    const index = this.#hash(key) % this.#buckets.length;
+    const list = this.#buckets[index];
+
+    if (!list || list.isEmpty()) return undefined;
+
+    const entry = list.find((entry) => entry.key === key);
+    return entry ? entry.value : undefined;
+  }
 }
