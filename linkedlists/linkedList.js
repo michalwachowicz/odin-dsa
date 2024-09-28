@@ -91,14 +91,14 @@ module.exports = class LinkedList {
     return false;
   }
 
-  find(value) {
+  find(cb) {
     if (!this.#head) return null;
 
     let current = this.#head;
     let index = 0;
 
     while (current) {
-      if (current.value === value) return index;
+      if (cb(current.value)) return index;
 
       current = current.next;
       index += 1;
