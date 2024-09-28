@@ -1,3 +1,5 @@
+const HashSet = require("../hash/hashSet");
+
 class Node {
   constructor(data) {
     this.data = data;
@@ -8,7 +10,7 @@ class Node {
 
 class Tree {
   constructor(arr) {
-    this.root = buildTree(arr);
+    this.root = buildTree(cleanArray(arr));
   }
 }
 
@@ -23,6 +25,9 @@ const buildTree = (arr) => {
 
   return root;
 };
+
+const cleanArray = (arr) =>
+  [...HashSet.from(arr)].sort((a, b) => (a < b ? -1 : 1));
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
