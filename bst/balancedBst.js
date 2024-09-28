@@ -101,6 +101,18 @@ class Tree {
     return 1 + Math.max(leftHeight, rightHeight);
   }
 
+  depth(node, root = this.root) {
+    if (!this.root) return -1;
+    if (node == this.root) return 0;
+
+    const leftDepth = this.depth(node, root.left);
+    const rightDepth = this.depth(node, root.right);
+
+    if (leftDepth === -1 && rightDepth === -1) return -1;
+
+    return 1 + Math.max(leftDepth, rightDepth);
+  }
+
   #getSuccessor(node) {
     node = node.right;
     while (node !== null && node.left !== null) node = node.left;
