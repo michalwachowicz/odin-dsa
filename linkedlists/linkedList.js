@@ -91,20 +91,30 @@ module.exports = class LinkedList {
     return false;
   }
 
-  find(cb) {
+  #traverse(cb) {
     if (!this.#head) return null;
 
     let current = this.#head;
     let index = 0;
 
     while (current) {
-      if (cb(current.value)) return index;
+      if (cb(current.value)) return { value: current.value, index };
 
       current = current.next;
       index += 1;
     }
 
     return null;
+  }
+
+  findIndex(cb) {
+    const result = this.#traverse(cb);
+    return result ? result.index : null;
+  }
+
+  find(cb) {
+    const result = this.#traverse(cb);
+    return result ? result.value : null;
   }
 
   insertAt(index, value) {
