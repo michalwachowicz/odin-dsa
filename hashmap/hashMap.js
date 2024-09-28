@@ -1,4 +1,4 @@
-const LinkedList = require("../linkedlists/linkedList");
+const { hash, generateBucketList } = require("./hashFunctions");
 
 class Entry {
   constructor(key, value) {
@@ -17,37 +17,20 @@ class HashMap {
     if (loadFactor > 1 || loadFactor < 0.1)
       throw new Error("Load factor must be between 0.1 and 1");
 
-    this.#buckets = this.#generateBucketList(capacity);
+    this.#buckets = generateBucketList(capacity);
     this.#loadFactor = loadFactor;
     this.#size = 0;
-  }
-
-  #generateBucketList(length) {
-    return Array.from({ length }, () => new LinkedList());
-  }
-
-  #hash(key) {
-    if (typeof key === "number") return key;
-
-    let hashCode = 0;
-    const primeNumber = 31;
-
-    for (let i = 0; i < key.length; i++) {
-      hashCode = primeNumber * hashCode + key.charCodeAt(i);
-    }
-
-    return hashCode;
   }
 
   #grow(size = this.#size) {
     if (size / this.#buckets.length <= this.#loadFactor) return;
     const copy = this.#buckets;
 
-    this.#buckets = this.#generateBucketList(copy.length * 2);
+    this.#buckets = generateBucketList(copy.length * 2);
     for (let list of copy) {
       while (list && list.size()) {
         const entry = list.pop();
-        const index = this.#hash(entry.key) % this.#buckets.length;
+        const index = hash(entry.key) % this.#buckets.length;
 
         this.#buckets[index].append(entry);
       }
@@ -55,7 +38,7 @@ class HashMap {
   }
 
   indexOf(key) {
-    return this.#hash(key) % this.#buckets.length;
+    return hash(key) % this.#buckets.length;
   }
 
   getEntry(key) {
@@ -111,7 +94,7 @@ class HashMap {
       while (!bucket.isEmpty()) bucket.pop();
     });
 
-    this.#buckets = this.#generateBucketList(this.#buckets.length);
+    this.#buckets = generateBucketList(this.#buckets.length);
     this.#size = 0;
   }
 
