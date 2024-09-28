@@ -75,6 +75,8 @@ class HashMap {
       return;
     }
 
+    this.#grow(this.#size + 1);
+
     const hash = this.#hash(key);
     const index = hash % this.#buckets.length;
 
