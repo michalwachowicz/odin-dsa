@@ -5,7 +5,7 @@ class Node {
   }
 }
 
-class LinkedList {
+module.exports = class LinkedList {
   #head;
   #tail;
   #size;
@@ -187,4 +187,4 @@ class LinkedList {
 
     return list;
   }
-}
+};
