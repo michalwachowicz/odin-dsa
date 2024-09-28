@@ -30,4 +30,8 @@ module.exports = class Queue {
     if (!this.#head) this.#tail = null;
     return dequeuedValue;
   }
+
+  isEmpty() {
+    return this.#head === null;
+  }
 };
