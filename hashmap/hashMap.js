@@ -71,6 +71,10 @@ class HashMap {
     return entry ? entry.value : undefined;
   }
 
+  has(key) {
+    return !!this.getEntry(key);
+  }
+
   put(key, value) {
     let entry = this.getEntry(key);
 
