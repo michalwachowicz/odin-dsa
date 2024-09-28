@@ -1,5 +1,12 @@
 const LinkedList = require("../linkedlists/linkedList");
 
+class Entry {
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+  }
+}
+
 class HashMap {
   #buckets;
   #loadFactor;
