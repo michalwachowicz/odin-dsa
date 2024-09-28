@@ -7,8 +7,8 @@ class Node {
 }
 
 class Tree {
-  constructor(data) {
-    this.root = new Node(data);
+  constructor(arr) {
+    this.root = buildTree(arr);
   }
 }
 
