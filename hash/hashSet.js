@@ -86,4 +86,19 @@ module.exports = class HashSet {
 
     return keys;
   }
+
+  *[Symbol.iterator]() {
+    for (let bucket of this.#buckets) {
+      for (let key of bucket) {
+        yield key;
+      }
+    }
+  }
+
+  static from(arr) {
+    const set = new HashSet();
+
+    arr.forEach((item) => set.add(item));
+    return set;
+  }
 };
