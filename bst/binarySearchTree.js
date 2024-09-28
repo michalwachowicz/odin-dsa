@@ -2,7 +2,7 @@ const TreeNode = require("./treeNode");
 const HashSet = require("../hash/hashSet");
 const Queue = require("../queue/queue");
 
-class Tree {
+module.exports = class Tree {
   constructor(arr) {
     const cleanArr = [...HashSet.from(arr)].sort((a, b) => (a < b ? -1 : 1));
     this.root = this.#buildTree(cleanArr);
@@ -171,4 +171,4 @@ class Tree {
 
     return node;
   }
-}
+};
